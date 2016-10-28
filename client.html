@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Client</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  </head>
+  <body>
+    <h1>Websocket Client</h1>
+    <div id="message">
+
+    </div>
+    <script type="text/javascript">
+       $(document).ready(function(){
+         var group = 'group1';
+
+         var socket = io('http://192.168.1.79:3210/');
+
+         socket.on('connect', function(){
+            $('#message').append('<p>Connected.</p>')
+            socket.emit('register', {
+              group: group
+            });
+            $('#message').append('<p>Registered.</p>')
+         });
+
+         socket.on('collaborative-user-joined', function(data){
+            $('#message').append('<p>collaborative-user-joined.</p>')
+            console.log('collaborative-user-joined.', data);
+         });
+
+         socket.on('collaborative-item-added', function(data){
+            $('#message').append('<p>collaborative-item-added.</p>')
+            console.log('collaborative-item-added.', data);
+         });
+       });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "collaborative-cart-rt",
+  "version": "1.0.0",
+  "description": "Getz Collaborative Cart Realtime",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Linh Le",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.4.2",
+    "socket.io": "^1.5.1"
+  }
+}
