@@ -5,6 +5,11 @@ module.exports = function(amqp, qcn){
 
   var publish = function (exchange, routingKey, content) {
     try {
+      if(pubChannel==null){
+          offlinePubQueue.push([exchange, routingKey, content]);
+          return;
+      }
+      
       pubChannel.publish(exchange, routingKey, content, { persistent: true },
                         function(err, ok) {
                           if (err) {
@@ -12,7 +17,7 @@ module.exports = function(amqp, qcn){
                             offlinePubQueue.push([exchange, routingKey, content]);
                             pubChannel.connection.close();
                           }
-                      "jobs"  });
+                        });
     } catch (e) {
       console.error("[AMQP] publish", e.message);
       offlinePubQueue.push([exchange, routingKey, content]);

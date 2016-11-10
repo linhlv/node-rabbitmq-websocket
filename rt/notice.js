@@ -1,7 +1,7 @@
 module.exports = function(io, config){
   var userJoined = function(data){
     if(data && data.group && data.result){
-      io.to(config.keys.group_prefix + data.group).emit('collaborative-user-joined', data.result);
+      io.sockets.in(config.keys.group_prefix + data.group).emit('collaborative-user-joined', data.result);
     }
   };
 
